@@ -1,0 +1,8 @@
+<% if @project.present? %>
+<% banner = @project.custom_value_for(CustomField.find_by_name('banner')) %>
+<% custom_banner = banner.value %>
+    <% if custom_banner.present? %>
+        <%= stylesheet_link_tag "showbanner.css", :plugin => 'showbanner' %>
+        <div class='project_banner'><%= custom_banner %></div>
+    <% end %>
+<% end %>
