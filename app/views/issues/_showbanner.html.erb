@@ -1,8 +1,23 @@
-<% if @project.present? %>
-<% banner = @project.custom_value_for(CustomField.find_by_name('banner')) %>
-<% custom_banner = banner.value %>
-    <% if custom_banner.present? %>
-        <%= stylesheet_link_tag "showbanner.css", :plugin => 'showbanner' %>
-        <div class='project_banner'><%= custom_banner %></div>
-    <% end %>
-<% end %>
+<%
+#  Set the name of the 'Banner' field on Redmine below (the full name of the field which contains the text to display)
+# ****************************************
+
+bannerField = "Banner (Internal Use Only)"
+
+# **************************************** 
+
+%>
+
+<% if User.current.admin? 
+
+
+    if @project.present? && @project.custom_value_for(CustomField.find_by_name(bannerField)).present? && @project.custom_value_for(CustomField.find_by_name('ShowInternalBanner')).value=='1' 
+
+    banner = @project.custom_value_for(CustomField.find_by_name(bannerField)) 
+
+        if banner.value.present? %>
+            <%= stylesheet_link_tag "showbanner.css", :plugin => 'showbanner' %>
+            <div class='project_banner'><%= banner.value %></div>
+        <% end 
+end 
+end %>
