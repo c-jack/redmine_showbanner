@@ -11,13 +11,16 @@ bannerField = "Banner (Internal Use Only)"
 <% if User.current.admin? 
 
 
-    if @project.present? && @project.custom_value_for(CustomField.find_by_name(bannerField)).present? && @project.custom_value_for(CustomField.find_by_name('ShowInternalBanner')).value=='1' 
+    if @project.present? && @project.custom_value_for(CustomField.find_by_name(bannerField)).present? && @project.custom_value_for(CustomField.find_by_name('ShowInternalBanner')).present? 
 
-    banner = @project.custom_value_for(CustomField.find_by_name(bannerField)) 
+        if @project.custom_value_for(CustomField.find_by_name('ShowInternalBanner')).value=='1'
 
-        if banner.value.present? %>
-            <%= stylesheet_link_tag "showbanner.css", :plugin => 'showbanner' %>
-            <div class='project_banner'><%= banner.value %></div>
-        <% end 
-end 
+            banner = @project.custom_value_for(CustomField.find_by_name(bannerField)) 
+
+                if banner.value.present? %>
+                    <%= stylesheet_link_tag "showbanner.css", :plugin => 'showbanner' %>
+                    <div class='project_banner'><%= banner.value %></div>
+                <% end
+        end 
+    end 
 end %>
