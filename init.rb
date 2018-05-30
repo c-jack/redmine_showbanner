@@ -7,4 +7,6 @@ Redmine::Plugin.register :showbanner do
   version '0.0.1'
   url 'https://github.com/c-jack/redmine_showbanner'
   author_url 'https://github.com/c-jack'
+
+  permission :view_project_banner, {}
 end

@@ -8,7 +8,7 @@ bannerField = "Banner (Internal Use Only)"
 
 %>
 
-<% if User.current.admin? 
+<% if User.current.allowed_to?(:view_project_banner, @project)
 
 
     if @project.present? && @project.custom_value_for(CustomField.find_by_name(bannerField)).present? && @project.custom_value_for(CustomField.find_by_name('ShowInternalBanner')).present? 

@@ -24,8 +24,8 @@
   </div>
   <% end %>
 
-<% # Overridden to only show the custom values if the use
-    if User.current.admin? 
+<% # Overridden to only show the custom values if the use has the 'View project banner' permission
+    if User.current.allowed_to?(:view_project_banner, @project)
 
     if @project.homepage.present? || @project.visible_custom_field_values.any?(&:present?) %>
   <ul>
